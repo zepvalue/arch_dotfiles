@@ -1,0 +1,265 @@
+[bar/white]
+
+;------------;
+; DIMENSIONS ;
+;------------;
+
+width = 100%
+height = 20
+offset-y = 0
+offset-x = 0
+
+border-top-size = 10
+border-bottom-size = 0
+border-right-size = 10
+border-left-size = 10
+
+;----------;
+; LOCATION ;
+;----------;
+
+bottom = false
+monitor = eDP-1
+wm-restack = none
+override-redirect = false
+
+;-------;
+; FONTS ;
+;-------;
+
+font-0 = Hack:size=10;3
+font-1 = "Font Awesome 5 Free:style=Solid:pixelsize=12;3"
+font-2 = "Font Awesome 5 Free:style=Regular:pixelsize=12;3"
+font-3 = "Font Awesome 5 Brands:pixelsize=12;3"
+
+;--------;
+; COLORS ;
+;--------;
+
+background = 0
+foreground = #afafaf
+border-color = 0
+
+;---------------;
+; MISCELLANEOUS ;
+;---------------;
+
+fixed-center = true
+padding-left = 2 
+padding-right = 2
+module-margin = 1.5
+
+modules-left = alsa backlight battery
+modules-center = i3
+modules-right = wlan date time github
+
+tray-position = none
+tray-detached = true
+
+[bar/mpd]
+;------------;
+; DIMENSIONS ;
+;------------;
+
+width = 100%
+height = 20
+offset-y = 0
+offset-x = 0
+
+border-top-size = 10
+border-bottom-size = 0
+border-right-size = 10
+border-left-size = 10
+
+;----------;
+; LOCATION ;
+;----------;
+
+bottom = true
+monitor = eDP-1
+wm-restack = none
+override-redirect = false
+
+;-------;
+; FONTS ;
+;-------;
+
+font-0 = Hack:size=10;3
+font-1 = "Font Awesome 5 Free:style=Solid:pixelsize=10;3"
+font-2 = "Font Awesome 5 Free:style=Regular:pixelsize=10;3"
+font-3 = "Font Awesome 5 Brands:pixelsize=10;3"
+
+;--------;
+; COLORS ;
+;--------;
+
+background = 0
+foreground = #ff8c00
+border-color = 0
+
+;---------------;
+; MISCELLANEOUS ;
+;---------------;
+
+fixed-center = true
+padding-left = 2 
+padding-right = 2
+module-margin = 1.5
+
+;modules-left = 
+modules-center = mpd
+;modules-right = 
+
+
+;---------;
+; MODULES ;
+;---------;
+
+[module/pulseaudio]
+type = internal/pulseaudio
+
+format-volume = <label-volume> <bar-volume>
+label-volume = VOL %percentage%%
+label-volume-foreground = ${root.foreground}
+
+label-muted = 🔇 muted
+label-muted-foreground = #666
+
+bar-volume-width = 10
+bar-volume-foreground-0 = #55aa55
+bar-volume-foreground-1 = #55aa55
+bar-volume-foreground-2 = #55aa55
+bar-volume-foreground-3 = #55aa55
+bar-volume-foreground-4 = #55aa55
+bar-volume-foreground-5 = #f5a70a
+bar-volume-foreground-6 = #ff5555
+bar-volume-gradient = false
+bar-volume-indicator = |
+bar-volume-indicator-font = 2
+bar-volume-fill = ─
+bar-volume-fill-font = 2
+bar-volume-empty = ─
+bar-volume-empty-font = 2
+bar-volume-empty-foreground = ${colors.foreground-alt}
+
+[module/i3]
+type = internal/i3
+
+pin-workspaces = true
+strip-wsnumbers = true
+enable-scroll = false
+
+label-unfocused-foreground = #afafaf
+label-focused-foreground = #ff8c00
+label-urgent-foreground = #ff0000
+
+[module/time]
+type = internal/date
+
+interval = 1.0
+
+date =  %H:%M
+
+[module/xbacklight]
+type = internal/xbacklight
+
+format = <label> <bar>
+label = BL
+
+bar-width = 10
+bar-indicator = |
+bar-indicator-foreground = #fff
+bar-indicator-font = 2
+bar-fill = ─
+bar-fill-font = 2
+bar-fill-foreground = #9f78e1
+bar-empty = ─
+bar-empty-font = 2
+bar-empty-foreground = ${colors.foreground-alt}
+
+[module/date]
+type = internal/date
+date =  %e %B - %A
+label = %date%
+
+
+[module/battery]
+type = internal/battery
+
+
+poll-interval = 1
+
+full-at = 95
+
+label-discharging = %percentage%%
+label-charging = %percentage%%
+label-full = %percentage%%
+
+format-discharging = <ramp-capacity> <label-discharging>
+format-full = <ramp-capacity> <label-full>
+format-charging =  <label-charging>
+
+ramp-capacity-0 = 
+ramp-capacity-1 = 
+ramp-capacity-2 = 
+ramp-capacity-3 = 
+ramp-capacity-4 = 
+
+[module/alsa]
+type = internal/alsa
+
+format-volume = <ramp-volume> <label-volume>
+format-muted =  0%
+
+ramp-volume-0 = 
+ramp-volume-1 = 
+ramp-volume-2 = 
+
+[module/backlight]
+type = internal/backlight
+card = intel_backlight
+format = <ramp> <label>
+label = %percentage%%
+ramp-0 = 
+ramp-1 = 
+ramp-2 = 
+
+[module/wlan]
+type = internal/network
+interface = wlp0s20f3
+interval = 5
+label-connected =  %essid%
+label-disconnected =  Not Connected
+
+[module/memory]
+type = internal/memory
+label =  %gb_used%
+
+[module/network]
+type = internal/network
+interface = wlp0s20f3
+label-connected =  %downspeed% |  %upspeed%
+
+[bar/float]
+inherit = bar/white
+background = #ffffff
+tray-position = center
+
+[module/github]
+type = internal/github
+format = <label>
+label =  %notifications%
+; Accessing an access token stored in an environment variable
+token = 6ce1a9ab7834f3a7acf42b84ed0a168c5a0cb2cc
+
+; Whether empty notifications should be displayed or not
+empty-notifications = false
+
+; Number of seconds in between requests
+interval = 100
+
+[module/slack]
+type = custom/text
+content = ""
+tail = true
+click-left = xdg-open https://codesmithny12.slack.com
